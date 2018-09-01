@@ -42,7 +42,7 @@ public class EmailServiceImpl {
         Properties properties = getMailProperties();
         Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("saikrishna.gopu@agrog.com","sai@number1");
+                return new PasswordAuthentication(username,password);
             }
         });
         
