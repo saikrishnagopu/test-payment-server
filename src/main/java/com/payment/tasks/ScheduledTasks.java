@@ -13,27 +13,33 @@ import com.payment.services.NotificationService;
 
 @Component
 public class ScheduledTasks {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-    
-    @Autowired
-    private NotificationService NotificationService;
-    		
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    //@Scheduled(cron = "0 0 * * * *")
-    @Scheduled(fixedRate = 10000)
-    public void sendHourlyNotifications() {
-        log.info("The time is now {}", dateFormat.format(new Date()));
-        NotificationService.sendHourlyEmails();
-    }
-    
-    
-    //@Scheduled(cron = "0 0 8 * * *")
-    @Scheduled(fixedRate = 10000)
-    public void reportDailyNotifications() {
-        log.info("The time is now {}", dateFormat.format(new Date()));
-        NotificationService.sendDailyRemainders();
-    }
+	@Autowired
+	private NotificationService NotificationService;
+
+	// @Scheduled(cron = "0 0 * * * *")
+	@Scheduled(fixedRate = 10000)
+	public void sendHourlyNotifications() {
+		log.info("The time is now {}", dateFormat.format(new Date()));
+		try {
+			NotificationService.sendHourlyEmails();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// @Scheduled(cron = "0 0 8 * * *")
+	@Scheduled(fixedRate = 10000)
+	public void reportDailyNotifications() {
+		log.info("The time is now {}", dateFormat.format(new Date()));
+		try {
+			NotificationService.sendDailyRemainders();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -44,12 +44,10 @@ public class NotificationServiceImpl implements NotificationService{
 		Calendar fromDate = Calendar.getInstance();
 		fromDate.add(Calendar.HOUR, -24);
 		Calendar toDate = Calendar.getInstance();
-		log.info("from - to" + fromDate.getTime() + " -- " + toDate.getTime());
 		List<String> dailyEmails =  transactionCrudRepositoryService.findDailyTransactionCount(fromDate.getTime());
 		if (!CollectionUtils.isEmpty(dailyEmails)) {
 			log.info("daily");
 			dailyEmails.forEach(email -> {
-//				log.info("Daily -> " + email);
 				SimpleMailMessage mailMessage=new SimpleMailMessage();
 				mailMessage.setTo(email);
 		        mailMessage.setSubject("Gentle Remainder of your transactions");
@@ -63,14 +61,11 @@ public class NotificationServiceImpl implements NotificationService{
 	@Override
 	public void sendHourlyEmails() {
 		Calendar fromDate = Calendar.getInstance();
-		fromDate.add(Calendar.DATE, -10);
+		fromDate.add(Calendar.HOUR, -1);
 		Calendar toDate = Calendar.getInstance();
-		log.info("from - to" + fromDate.getTime() + " -- " + toDate.getTime());
 		List<String> hourlyEmails =  transactionCrudRepositoryService.findHourlyTransactionCount(fromDate.getTime());
 		if (!CollectionUtils.isEmpty(hourlyEmails)) {
-			log.info("hourly");
 			hourlyEmails.forEach(email -> {
-//				log.info("hourly -> " + email);
 				SimpleMailMessage mailMessage=new SimpleMailMessage();
 				mailMessage.setTo(email);
 		        mailMessage.setSubject("Gentle Remainder of your transactions");
