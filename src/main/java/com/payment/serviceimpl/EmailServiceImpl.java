@@ -2,6 +2,9 @@ package com.payment.serviceimpl;
 
 import java.util.Properties;
 
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,14 +38,24 @@ public class EmailServiceImpl {
         javaMailSender.setPort(port);
         javaMailSender.setUsername(username);
         javaMailSender.setPassword(password);
-        javaMailSender.setJavaMailProperties(getMailProperties());
+        
+        Properties properties = getMailProperties();
+        Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("saikrishna.gopu@agrog.com","sai@number1");
+            }
+        });
+        
+        javaMailSender.setSession(session);
+        javaMailSender.setJavaMailProperties(properties);
         return javaMailSender;
     }
 
     private Properties getMailProperties() {
         Properties properties = new Properties();
         properties.setProperty("mail.transport.protocol", "smtp");
-        properties.setProperty("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.setProperty("mail.smtp.auth", "false");
         properties.setProperty("mail.smtp.starttls.enable", "true");
         properties.setProperty("mail.debug", "false");
         return properties;
