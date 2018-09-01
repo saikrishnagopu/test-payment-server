@@ -21,8 +21,8 @@ public class ScheduledTasks {
 	@Autowired
 	private NotificationService NotificationService;
 
-//	@Scheduled(cron = "0 0 * * * *")
-	@Scheduled(fixedRate = 10000)
+	@Scheduled(cron = "0 0 * * * *")
+//	@Scheduled(fixedRate = 10000)
 	public void sendHourlyNotifications() {
 		log.info("The time is now {}", dateFormat.format(new Date()));
 		try {
@@ -32,8 +32,8 @@ public class ScheduledTasks {
 		}
 	}
 
-	//@Scheduled(cron = "0 0 8 * * *")
-	@Scheduled(fixedRate = 10000)
+	@Scheduled(cron = "0 0 8 * * *")
+//	@Scheduled(fixedRate = 10000)
 	public void reportDailyNotifications() {
 		log.info("The time is now {}", dateFormat.format(new Date()));
 		try {

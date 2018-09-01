@@ -61,7 +61,7 @@ public class NotificationServiceImpl implements NotificationService{
 	@Override
 	public void sendHourlyEmails() {
 		Calendar fromDate = Calendar.getInstance();
-		fromDate.add(Calendar.DATE, -10);
+		fromDate.add(Calendar.HOUR, -1);
 		Calendar toDate = Calendar.getInstance();
 		List<String> hourlyEmails =  transactionCrudRepositoryService.findHourlyTransactionCount(fromDate.getTime());
 		if (!CollectionUtils.isEmpty(hourlyEmails)) {
