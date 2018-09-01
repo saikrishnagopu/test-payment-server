@@ -1,4 +1,4 @@
-# agrogo-payment-service
+# payment-service
 
 1. Each user with different Email Id will have one account
 2. Each Account Will have multiple transaction, whether its credit or debit.
